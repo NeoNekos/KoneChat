@@ -1,0 +1,17 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_authors}"
+description = '''${mod_description}'''
+
+[[dependencies."${mod_id}"]]
+modId = "kubejs"
+mandatory = true
+versionRange = "[2001.6.5-build.16,)"
+ordering = "NONE"
+side = "SERVER"
