@@ -15,5 +15,6 @@ public final class KoneChatCommands {
         root.then(HypertextCommands.create());
         root.then(DirectMessageCommands.create());
         dispatcher.register(root);
+        DirectMessageCommands.registerVanillaAliases(dispatcher);
     }
 }
