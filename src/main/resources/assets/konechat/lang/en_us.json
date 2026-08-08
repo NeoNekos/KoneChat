@@ -1,0 +1,16 @@
+{
+  "konechat.chat.reloading": "KoneChat is reloading; your message was not sent.",
+  "konechat.chat.filtered": "Your message was rejected by the server filter.",
+  "konechat.chat.no_channel": "You are not in a channel that can send messages.",
+  "konechat.chat.cannot_send": "You cannot send messages in this channel.",
+  "konechat.chat.cancelled": "Your message was cancelled.",
+  "konechat.chat.failed": "KoneChat could not process your message.",
+  "konechat.channel.joined": "Joined channel %s.",
+  "konechat.channel.join_failed": "Could not join channel %s.",
+  "konechat.channel.left": "Left your current channel.",
+  "konechat.channel.leave_failed": "Could not leave your current channel.",
+  "konechat.channel.disabled": "Disabled channel %s.",
+  "konechat.channel.enabled": "Enabled channel %s.",
+  "konechat.channel.kicked": "You were removed from channel %s.",
+  "konechat.channel.kick_success": "Removed %s from the channel."
+}

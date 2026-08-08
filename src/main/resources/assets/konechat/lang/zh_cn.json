@@ -1,0 +1,16 @@
+{
+  "konechat.chat.reloading": "KoneChat 正在重载，消息未发送。",
+  "konechat.chat.filtered": "消息被服务器过滤器拒绝。",
+  "konechat.chat.no_channel": "你没有加入可发言的频道。",
+  "konechat.chat.cannot_send": "你不能在此频道发言。",
+  "konechat.chat.cancelled": "消息已取消。",
+  "konechat.chat.failed": "KoneChat 无法处理这条消息。",
+  "konechat.channel.joined": "已加入频道 %s。",
+  "konechat.channel.join_failed": "无法加入频道 %s。",
+  "konechat.channel.left": "已退出当前频道。",
+  "konechat.channel.leave_failed": "无法退出当前频道。",
+  "konechat.channel.disabled": "已禁用频道 %s。",
+  "konechat.channel.enabled": "已启用频道 %s。",
+  "konechat.channel.kicked": "你已被移出频道 %s。",
+  "konechat.channel.kick_success": "已将 %s 移出频道。"
+}

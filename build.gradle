@@ -70,6 +70,21 @@ mixin {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+sourceSets {
+    coreTest {
+        java.srcDir 'src/coreTest/java'
+        resources.srcDir 'src/coreTest/resources'
+        compileClasspath += sourceSets.main.output + configurations.compileClasspath
+        runtimeClasspath += output + compileClasspath
+    }
+}
+
+tasks.register('coreTest', JavaExec) {
+    dependsOn tasks.named('coreTestClasses')
+    classpath = sourceSets.coreTest.runtimeClasspath
+    mainClass = 'cc.yamrc.konechat.hypertext.HypertextCoreTestMain'
+}
+
 repositories {
     maven {
         name = "Modrinth"
