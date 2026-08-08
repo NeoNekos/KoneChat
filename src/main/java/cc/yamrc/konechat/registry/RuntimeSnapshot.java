@@ -14,10 +14,13 @@ public record RuntimeSnapshot(
         Map<ResourceLocation, ChatFormat> formats,
         List<ComponentRule> componentRules,
         Map<ResourceLocation, MatcherProvider> matcherProviders,
-        GlobalSettings settings
+        GlobalSettings settings,
+        DirectMessageDefinition directMessage
 ) {
     public RuntimeSnapshot {
-        if (generation < 1 || settings == null) throw new IllegalArgumentException("runtime snapshot is invalid");
+        if (generation < 1 || settings == null || directMessage == null) {
+            throw new IllegalArgumentException("runtime snapshot is invalid");
+        }
         channels = Map.copyOf(channels);
         formats = Map.copyOf(formats);
         componentRules = List.copyOf(componentRules);

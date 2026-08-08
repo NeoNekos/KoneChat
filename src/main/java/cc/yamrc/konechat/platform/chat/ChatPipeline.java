@@ -3,8 +3,11 @@ package cc.yamrc.konechat.platform.chat;
 import cc.yamrc.konechat.api.FormatContext;
 import cc.yamrc.konechat.api.HypertextContext;
 import cc.yamrc.konechat.api.KoneChatRuntime;
+import cc.yamrc.konechat.api.DirectConditionContext;
+import cc.yamrc.konechat.api.DirectFormatContext;
 import cc.yamrc.konechat.channel.ChannelService;
 import cc.yamrc.konechat.registry.ChannelDefinition;
+import cc.yamrc.konechat.registry.DirectMessageDefinition;
 import cc.yamrc.konechat.registry.RuntimeSnapshot;
 import cc.yamrc.konechat.registry.RuntimeState;
 import cc.yamrc.konechat.hypertext.HypertextEngine;
@@ -28,13 +31,23 @@ public final class ChatPipeline {
 
     public static boolean sendDirect(ServerPlayer sender, ServerPlayer target, String rawText) {
         try {
+            RuntimeSnapshot snapshot = KoneChatRuntime.registry().snapshot()
+                    .orElseThrow(() -> new IllegalStateException("KoneChat registry is not ready"));
+            if (rawText == null) throw new IllegalArgumentException("message text must not be null");
+
+            DirectMessageDefinition definition = snapshot.directMessage();
+            Boolean allowed = definition.condition().apply(new DirectConditionContext(
+                    sender, target, sender.server, rawText));
+            if (allowed == null) throw new IllegalStateException("direct message condition returned null");
+            if (!allowed) return false;
+
             Component message = renderHypertext(sender, "konechat:direct", rawText, false);
-            Component formatted = Component.literal("[")
-                    .append(sender.getDisplayName())
-                    .append(" -> ")
-                    .append(target.getDisplayName())
-                    .append("] ")
-                    .append(message);
+            DirectFormatContext context = new DirectFormatContext(sender, target, sender.server,
+                    FormatContext.Route.direct("konechat:direct", "konechat:direct"),
+                    snapshot.generation(), rawText, rawText, message,
+                    Component.literal("konechat:direct"), false);
+            Component formatted = definition.format().render(context);
+            if (formatted == null) return false;
             sender.sendSystemMessage(formatted);
             if (target != sender) target.sendSystemMessage(formatted);
             return true;

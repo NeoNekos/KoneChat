@@ -22,6 +22,12 @@ public final class RegistryEventJS extends EventJS {
         draft.format(resourceId, new FormatBuilder(definition).build());
     }
 
+    public void directMessage(Object definition) {
+        DirectMessageBuilder builder = new DirectMessageBuilder();
+        RhinoCallback.capture(definition, "direct message definition").call(builder);
+        draft.directMessage(builder.build());
+    }
+
     public void component(String id, Object definition) {
         ResourceLocation resourceId = ResourceIds.parse(id, "component id");
         ComponentRuleBuilder builder = new ComponentRuleBuilder(resourceId, draft.generation());

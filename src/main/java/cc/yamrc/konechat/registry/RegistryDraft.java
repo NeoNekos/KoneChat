@@ -18,6 +18,8 @@ public final class RegistryDraft {
     private final Map<ResourceLocation, ComponentRuleDraft> componentRules = new LinkedHashMap<>();
     private final Map<ResourceLocation, MatcherProvider> matcherProviders = new LinkedHashMap<>();
     private GlobalSettings settings = GlobalSettings.defaults();
+    private DirectMessageDefinition directMessage = DirectMessageDefinition.defaults();
+    private boolean directMessageRegistered;
 
     public RegistryDraft(long generation) {
         if (generation < 1) throw new IllegalArgumentException("registry generation must be positive");
@@ -31,6 +33,14 @@ public final class RegistryDraft {
     public void format(ResourceLocation id, ChatFormat value) { register(formats, id, value); }
     public void component(ComponentRuleDraft value) { register(componentRules, value.id(), value); }
     public void provider(ResourceLocation id, MatcherProvider value) { register(matcherProviders, id, value); }
+    public void directMessage(DirectMessageDefinition value) {
+        if (directMessageRegistered) {
+            throw new IllegalArgumentException("direct message definition is already registered");
+        }
+        if (value == null) throw new IllegalArgumentException("direct message definition is incomplete");
+        directMessage = value;
+        directMessageRegistered = true;
+    }
     public void removeChannel(ResourceLocation id) { remove(channels, id); }
     public void removeFormat(ResourceLocation id) { remove(formats, id); }
     public void removeComponent(ResourceLocation id) { remove(componentRules, id); }
@@ -44,7 +54,8 @@ public final class RegistryDraft {
         List<ComponentRule> compiled = new ArrayList<>();
         for (ComponentRuleDraft rule : componentRules.values()) compiled.add(rule.compile(matcherProviders));
         compiled.sort(Comparator.comparingInt(ComponentRule::weight).reversed().thenComparing(ComponentRule::id));
-        return new RuntimeSnapshot(generation, channels, formats, compiled, matcherProviders, settings);
+        return new RuntimeSnapshot(generation, channels, formats, compiled, matcherProviders, settings,
+                directMessage);
     }
 
     private static <T> void register(Map<ResourceLocation, T> map, ResourceLocation id, T value) {

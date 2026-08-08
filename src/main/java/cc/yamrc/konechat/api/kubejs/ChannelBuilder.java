@@ -30,17 +30,15 @@ public final class ChannelBuilder {
 
     ChannelDefinition build() {
         return new ChannelDefinition(id, formatId, autoJoin, weight,
-                condition(canJoin, ChannelConditionContext.Reason.JOIN),
-                condition(canLeave, ChannelConditionContext.Reason.LEAVE),
-                condition(canSend, ChannelConditionContext.Reason.SEND));
+                condition(canJoin),
+                condition(canLeave),
+                condition(canSend));
     }
 
-    private Function<ChannelConditionContext, Boolean> condition(RhinoCallback callback,
-                                                                  ChannelConditionContext.Reason reason) {
+    private Function<ChannelConditionContext, Boolean> condition(RhinoCallback callback) {
         if (callback == null) return context -> true;
         return context -> {
-            Object value = callback.call(new ChannelConditionContext(context.sender,
-                    context.server, id.toString(), reason));
+            Object value = callback.call(context);
             if (!(value instanceof Boolean result)) {
                 throw new IllegalArgumentException("channel condition must return boolean");
             }

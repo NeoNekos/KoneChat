@@ -3,7 +3,7 @@ package cc.yamrc.konechat.api;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ClassCanBeRecord"})
 public final class ChannelConditionContext {
     public final ServerPlayer sender;
     public final MinecraftServer server;
