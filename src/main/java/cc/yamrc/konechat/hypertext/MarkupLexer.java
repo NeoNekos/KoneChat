@@ -85,6 +85,7 @@ public final class MarkupLexer {
         return true;
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     static boolean isHex(String value) {
         if (value.length() != 7 || value.charAt(0) != '#') return false;
         for (int i = 1; i < value.length(); i++) {

@@ -6,9 +6,9 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Function;
 
+@SuppressWarnings("unused")
 public final class ChannelBuilder {
     private final ResourceLocation id;
-    private final long generation;
     private boolean autoJoin;
     private int weight;
     private ResourceLocation formatId;
@@ -16,9 +16,8 @@ public final class ChannelBuilder {
     private RhinoCallback canLeave;
     private RhinoCallback canSend;
 
-    public ChannelBuilder(ResourceLocation id, long generation) {
+    public ChannelBuilder(ResourceLocation id) {
         this.id = id;
-        this.generation = generation;
         this.formatId = id;
     }
 

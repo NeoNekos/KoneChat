@@ -32,12 +32,12 @@ public final class GradientLayout {
             List<String> clusters = new ArrayList<>();
             var matcher = GRAPHEME.matcher(literal.text());
             while (matcher.find()) clusters.add(matcher.group());
-            for (int index = 0; index < clusters.size(); index++) {
+            for (String cluster : clusters) {
                 int color = effectiveColor(literal, cursors, totals);
                 StyleState style = color < 0 ? literal.style() : new StyleState(color, literal.style().bold(),
                         literal.style().italic(), literal.style().underlined(), literal.style().strikethrough(),
                         literal.style().obfuscated());
-                out.literal(clusters.get(index), literal.matchable(), style, literal.gradients(), literal.colors());
+                out.literal(cluster, literal.matchable(), style, literal.gradients(), literal.colors());
                 for (ComponentPlan.Gradient gradient : literal.gradients()) {
                     cursors.merge(gradient, 1, Integer::sum);
                 }

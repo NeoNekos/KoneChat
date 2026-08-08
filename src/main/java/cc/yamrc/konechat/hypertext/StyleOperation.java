@@ -1,6 +1,5 @@
 package cc.yamrc.konechat.hypertext;
 
-import java.util.Locale;
 import java.util.Optional;
 
 public record StyleOperation(Kind kind, Integer color, Boolean value) {

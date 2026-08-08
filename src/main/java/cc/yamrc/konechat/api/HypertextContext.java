@@ -4,6 +4,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
+@SuppressWarnings("unused")
 public record HypertextContext(
         ServerPlayer sender,
         MinecraftServer server,

@@ -11,6 +11,7 @@
   "konechat.channel.leave_failed": "Could not leave your current channel.",
   "konechat.channel.disabled": "Disabled channel %s.",
   "konechat.channel.enabled": "Enabled channel %s.",
+  "konechat.channel.list": "This channel has the following members: %s",
   "konechat.channel.kicked": "You were removed from channel %s.",
   "konechat.channel.kick_success": "Removed %s from the channel."
 }

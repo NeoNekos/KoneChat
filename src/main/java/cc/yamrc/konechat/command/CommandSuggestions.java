@@ -14,6 +14,7 @@ final class CommandSuggestions {
     static CompletableFuture<Suggestions> channels(SuggestionsBuilder builder) {
         KoneChatRuntime.registry().snapshot().ifPresent(snapshot ->
                 SharedSuggestionProvider.suggestResource(snapshot.channels().keySet().stream(), builder));
+
         return builder.buildFuture();
     }
 }

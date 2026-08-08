@@ -10,6 +10,7 @@
   "konechat.channel.left": "已退出当前频道。",
   "konechat.channel.leave_failed": "无法退出当前频道。",
   "konechat.channel.disabled": "已禁用频道 %s。",
+  "konechat.channel.list": "此频道有如下成员：%s",
   "konechat.channel.enabled": "已启用频道 %s。",
   "konechat.channel.kicked": "你已被移出频道 %s。",
   "konechat.channel.kick_success": "已将 %s 移出频道。"

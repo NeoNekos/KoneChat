@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 /** Small server-side operations surface intended for KubeJS scripts. */
+@SuppressWarnings("unused")
 public final class KoneChatBindings {
     public boolean join(Object player, String id) {
         return channels().join(player(player), ResourceIds.parse(id, "channel id"), false);

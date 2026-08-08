@@ -11,5 +11,4 @@ public final class ChannelRuntimeState {
     public boolean isDisabled(ResourceLocation id) { return disabled.contains(id); }
     public void disable(ResourceLocation id) { disabled.add(id); }
     public void enable(ResourceLocation id) { disabled.remove(id); }
-    public void clear() { disabled.clear(); }
 }

@@ -3,7 +3,6 @@ package cc.yamrc.konechat.hypertext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.contents.LiteralContents;
 
 public final class VanillaComponentRenderer {
     private VanillaComponentRenderer() {
@@ -28,6 +27,7 @@ public final class VanillaComponentRenderer {
         throw new HypertextException("unresolved dynamic component");
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static Style style(StyleState state, boolean color) {
         Style style = Style.EMPTY;
         if (color && state.color() != null) style = style.withColor(state.color());

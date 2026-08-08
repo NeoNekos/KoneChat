@@ -25,6 +25,7 @@ final class HypertextCommands {
         Component component = cc.yamrc.konechat.platform.chat.ChatPipeline
                 .renderHypertext(player, "konechat:preview", text, true);
         player.sendSystemMessage(component);
+
         return 1;
     }
 }

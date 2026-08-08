@@ -16,6 +16,7 @@ public final class ComponentPlan {
         return nodes;
     }
 
+    @SuppressWarnings("unused")
     public String displayText() {
         StringBuilder text = new StringBuilder();
         for (Node node : nodes) text.append(node.displayText());

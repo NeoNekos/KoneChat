@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Function;
 
+@SuppressWarnings("unused")
 public final class ComponentRuleBuilder {
     private final ResourceLocation id;
     private final long generation;

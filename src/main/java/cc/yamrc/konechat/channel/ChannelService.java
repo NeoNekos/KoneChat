@@ -5,7 +5,6 @@ import cc.yamrc.konechat.registry.ChannelDefinition;
 import cc.yamrc.konechat.registry.GlobalSettings;
 import cc.yamrc.konechat.registry.RegistryManager;
 import cc.yamrc.konechat.registry.RuntimeSnapshot;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;

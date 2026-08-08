@@ -16,12 +16,12 @@ public abstract class ScriptManagerMixin {
     @Shadow @Final public ScriptType scriptType;
 
     @Inject(method = "reload", at = @At("HEAD"), remap = false)
-    private void konechat$beginReload(ResourceManager resources, CallbackInfo callbackInfo) {
+    private void konechat$beginReload(ResourceManager resourceManager, CallbackInfo callbackInfo) {
         if (scriptType == ScriptType.SERVER) KoneChatPlugin.beforeServerScriptsReload();
     }
 
     @Inject(method = "reload", at = @At("RETURN"), remap = false)
-    private void konechat$publishReload(ResourceManager resources, CallbackInfo callbackInfo) {
+    private void konechat$publishReload(ResourceManager resourceManager, CallbackInfo callbackInfo) {
         if (scriptType == ScriptType.SERVER) KoneChatPlugin.afterServerScriptsReload();
     }
 }

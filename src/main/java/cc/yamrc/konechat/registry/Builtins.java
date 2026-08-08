@@ -34,9 +34,9 @@ public final class Builtins {
                     .append(Component.literal("[").withStyle(style -> style.withColor(ChatFormatting.DARK_GRAY)))
                     .append(
                             stack.getHoverName().copy()
-                                    .withStyle(style -> style.withColor(stack.getRarity().color)
-                                            .withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new HoverEvent.ItemStackInfo(stack)))
-                                    )
+                                    .withStyle(stack.getRarity().getStyleModifier())
+                                    .withStyle(style -> style.withHoverEvent(new HoverEvent(
+                                            HoverEvent.Action.SHOW_ITEM, new HoverEvent.ItemStackInfo(stack))))
                     )
                     .append(Component.literal("]").withStyle(style -> style.withColor(ChatFormatting.DARK_GRAY)));
         }));

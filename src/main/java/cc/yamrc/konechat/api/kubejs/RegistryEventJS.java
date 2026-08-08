@@ -1,10 +1,10 @@
 package cc.yamrc.konechat.api.kubejs;
 
-import cc.yamrc.konechat.api.ChatFormat;
 import cc.yamrc.konechat.registry.RegistryDraft;
 import dev.latvian.mods.kubejs.event.EventJS;
 import net.minecraft.resources.ResourceLocation;
 
+@SuppressWarnings("unused")
 public final class RegistryEventJS extends EventJS {
     private final RegistryDraft draft;
 
@@ -12,14 +12,14 @@ public final class RegistryEventJS extends EventJS {
 
     public void channel(String id, Object definition) {
         ResourceLocation resourceId = ResourceIds.parse(id, "channel id");
-        ChannelBuilder builder = new ChannelBuilder(resourceId, draft.generation());
+        ChannelBuilder builder = new ChannelBuilder(resourceId);
         RhinoCallback.capture(definition, "channel definition").call(builder);
         draft.channel(builder.build());
     }
 
     public void format(String id, Object definition) {
         ResourceLocation resourceId = ResourceIds.parse(id, "format id");
-        draft.format(resourceId, new FormatBuilder(definition, draft.generation()).build(draft.generation()));
+        draft.format(resourceId, new FormatBuilder(definition).build());
     }
 
     public void component(String id, Object definition) {

@@ -3,6 +3,7 @@ package cc.yamrc.konechat.api.kubejs;
 import cc.yamrc.konechat.hypertext.HypertextConfig;
 import cc.yamrc.konechat.registry.GlobalSettings;
 
+@SuppressWarnings("unused")
 public final class SettingsBuilder {
     private boolean noChannelFallback;
     private long autoJoinDebounce;
