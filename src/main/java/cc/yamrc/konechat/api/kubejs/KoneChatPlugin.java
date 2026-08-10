@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.atomic.AtomicReference;
 
 public final class KoneChatPlugin extends KubeJSPlugin {
-    private static final Logger LOGGER = LoggerFactory.getLogger("KoneChat/KubeJS");
+    private static final Logger LOGGER = LoggerFactory.getLogger("KoneChat KubeJS");
     private static long loadingGeneration;
 
     @Override

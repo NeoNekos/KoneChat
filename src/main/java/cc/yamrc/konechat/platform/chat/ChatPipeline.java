@@ -12,16 +12,16 @@ import cc.yamrc.konechat.registry.RuntimeSnapshot;
 import cc.yamrc.konechat.registry.RuntimeState;
 import cc.yamrc.konechat.hypertext.HypertextEngine;
 import cc.yamrc.konechat.platform.ServerTranslations;
-import com.mojang.logging.LogUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.PlayerChatMessage;
 import net.minecraft.server.level.ServerPlayer;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
 public final class ChatPipeline {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    private static final Logger LOGGER = LoggerFactory.getLogger("KoneChat ChatPipeline");
     private static final ChannelService CHANNELS = new ChannelService(KoneChatRuntime.registry());
 
     private ChatPipeline() {
@@ -50,6 +50,8 @@ public final class ChatPipeline {
             if (formatted == null) return false;
             sender.sendSystemMessage(formatted);
             if (target != sender) target.sendSystemMessage(formatted);
+            LOGGER.info("{} -> {} ChatOutcome: {}", sender.getGameProfile(), target.getGameProfile(), rawText);
+
             return true;
         } catch (Throwable throwable) {
             LOGGER.error("KoneChat direct message failed for {}", sender.getGameProfile().getName(), throwable);
@@ -84,6 +86,7 @@ public final class ChatPipeline {
                     ? ChatOutcome.rejected(ServerTranslations.message(sender, "konechat.chat.no_channel"))
                     : ChatOutcome.pass();
         }
+
         ChannelDefinition channel = snapshot.channels().get(active.get());
         try {
             if (!CHANNELS.canSend(sender, channel)) {
@@ -100,9 +103,12 @@ public final class ChatPipeline {
                 return ChatOutcome.rejected(ServerTranslations.message(sender, "konechat.chat.cancelled"));
             }
             for (ServerPlayer recipient : CHANNELS.members(sender, channel.id())) recipient.sendSystemMessage(formatted);
+            LOGGER.info("{} ChatOutcome: {}", sender.getGameProfile(), raw);
+
             return ChatOutcome.delivered();
         } catch (Throwable throwable) {
             LOGGER.error("KoneChat chat pipeline failed for {}", sender.getGameProfile().getName(), throwable);
+
             return ChatOutcome.failed(ServerTranslations.message(sender, "konechat.chat.failed"));
         }
     }

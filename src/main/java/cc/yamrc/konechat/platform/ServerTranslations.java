@@ -1,6 +1,5 @@
 package cc.yamrc.konechat.platform;
 
-import com.mojang.logging.LogUtils;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.MutableComponent;
@@ -8,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +16,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public final class ServerTranslations {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    private static final Logger LOGGER = LoggerFactory.getLogger("KoneChat I18N");
     private static final String DEFAULT_LANGUAGE = "en_us";
     private static final Map<String, Map<String, String>> TRANSLATIONS = Map.of(
             DEFAULT_LANGUAGE, load(DEFAULT_LANGUAGE),
